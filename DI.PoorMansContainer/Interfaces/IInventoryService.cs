@@ -1,6 +1,6 @@
 namespace DI.PoorMansContainer.Interfaces
 {
-    public interface ICustomer
+    public interface IInventoryService
     {
         void UpdateCustomerOrder(string customer, string product);
     }

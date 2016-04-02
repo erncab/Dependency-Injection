@@ -11,7 +11,7 @@ namespace DI.PoorMansContainer
         {
             Container container = new Container();
             container.Register<IBillingProcessor, BillingProcessor>();
-            container.Register<ICustomer, Customer>();
+            container.Register<IInventoryService, InventoryService>();
             container.Register<INotifier, Notifier>();
             container.Register<ILogger, Logger>();
 

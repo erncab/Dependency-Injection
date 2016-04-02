@@ -7,8 +7,8 @@ namespace DI.PoorMansContainer.Classes
     {
         void INotifier.SendReceipt(OrderInfo orderInfo)
         {
-            // send email to customer with receipt
-            Console.WriteLine("Receipt sent to customer '{0}' via email.", orderInfo.CustomerName);
+            // send email to inventoryService with receipt
+            Console.WriteLine("Receipt sent to inventoryService '{0}' via email.", orderInfo.CustomerName);
         }
     }
 }

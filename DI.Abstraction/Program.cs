@@ -3,9 +3,9 @@ using DI.Abstraction.Classes;
 
 namespace DI.Abstraction
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("ABSTRACTION Example");
             Console.WriteLine();
@@ -21,10 +21,12 @@ namespace DI.Abstraction
 
             Console.WriteLine("Production:");
             Console.WriteLine();
+
             Commerce commerce = new Commerce(new BillingProcessor(), 
                                              new InventoryService(),
                                              new Notifier(),
                                              new Logger());
+
             commerce.ProcessOrder(orderInfo);
 
             Console.WriteLine();

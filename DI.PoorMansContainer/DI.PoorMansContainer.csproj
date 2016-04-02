@@ -44,14 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BillingProcessor.cs" />
-    <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\InventoryService.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\Notifier.cs" />
     <Compile Include="Commerce.cs" />
     <Compile Include="DIContainer\Container.cs" />
     <Compile Include="DIContainer\ContainerItem.cs" />
     <Compile Include="Interfaces\IBillingProcessor.cs" />
-    <Compile Include="Interfaces\ICustomer.cs" />
+    <Compile Include="Interfaces\IInventoryService.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\INotifier.cs" />
     <Compile Include="OrderInfo.cs" />
