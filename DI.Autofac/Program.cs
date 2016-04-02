@@ -58,6 +58,7 @@ namespace DI.Autofac
                     {
                         case "1":
                             #region regular container usage
+
                             builder.RegisterType<Commerce1>();
                             builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
                             builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
@@ -69,12 +70,14 @@ namespace DI.Autofac
                             Commerce1 commerce1 = Container.Resolve<Commerce1>();
 
                             commerce1.ProcessOrder(orderInfo);
+
                             #endregion
 
                             break;
                         
                         case "2":
                             #region specific service locator (Commerce2)
+                            
                             builder.RegisterType<Commerce2>();
                             builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
                             builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
@@ -87,12 +90,14 @@ namespace DI.Autofac
                             Commerce2 commerce2 = Container.Resolve<Commerce2>();
 
                             commerce2.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;
                         
                         case "3":
                             #region general service locator (Commerce3)
+                            
                             builder.RegisterType<Commerce3>();
                             builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
                             builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
@@ -105,12 +110,14 @@ namespace DI.Autofac
                             Commerce3 commerce3 = Container.Resolve<Commerce3>();
 
                             commerce3.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;
                         
                         case "4":
                             #region lifetime scope & singleton (Commerce4)
+                            
                             builder.RegisterType<Commerce4>();
                             builder.RegisterType<BillingProcessor>().As<IBillingProcessor>().InstancePerLifetimeScope();
                             builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>().InstancePerLifetimeScope();
@@ -147,6 +154,7 @@ namespace DI.Autofac
                         
                         case "5":
                             #region assembly scanning (Commerce5)
+                            
                             builder.RegisterType<Commerce5>();
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.EndsWith("Processor"))
@@ -157,12 +165,14 @@ namespace DI.Autofac
                             Commerce5 commerce5 = Container.Resolve<Commerce5>();
 
                             commerce5.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;
                         
                         case "6":
                             #region module usage (Commerce6)
+                            
                             builder.RegisterType<Commerce6>();
                             builder.RegisterModule<ProcessorRegistrationModule>();
 
@@ -171,12 +181,14 @@ namespace DI.Autofac
                             Commerce6 commerce6 = Container.Resolve<Commerce6>();
 
                             commerce6.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;
                         
                         case "7":
                             #region one-to-many (Commerce7)
+                            
                             builder.RegisterType<Commerce7>();
                             builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
                             builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
@@ -192,12 +204,14 @@ namespace DI.Autofac
                             Commerce7 commerce7 = Container.Resolve<Commerce7>();
 
                             commerce7.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;
                         
                         case "8":
                             #region post-construction resolve & property injection (Commerce8)
+                            
                             builder.RegisterType<Commerce8>().PropertiesAutowired();
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.EndsWith("Processor"))
@@ -213,24 +227,28 @@ namespace DI.Autofac
                             Commerce8 commerce8 = Container.Resolve<Commerce8>();
 
                             commerce8.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;
                         
                         case "9":
                             #region constructor finder (Commerce9)
+                            
                             //builder.RegisterType<Commerce9>().WithParameters(new List<Autofac.Core.Parameter>() {
                             //new NamedParameter("a", 1), 
                             //new NamedParameter("b", 1),
                             //new NamedParameter("c", 1), 
                             //new NamedParameter("d", 1) });
                             #region fix
+                            
                             builder.RegisterType<Commerce9>().WithParameters(new List<Parameter>() {
                                 new NamedParameter("a", 1), 
                                 new NamedParameter("b", 1),
                                 new NamedParameter("c", 1), 
                                 new NamedParameter("d", 1) }).FindConstructorsWith(new AwesomeConstructorFinder());
                             #endregion
+                            
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.EndsWith("Processor"))
                                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
@@ -244,6 +262,7 @@ namespace DI.Autofac
                             Commerce9 commerce9 = Container.Resolve<Commerce9>();
 
                             commerce9.ProcessOrder(orderInfo);
+                            
                             #endregion
 
                             break;

@@ -16,7 +16,8 @@ namespace DI.Autofac
             foreach (ConstructorInfo constructor in constructors)
             {
                 object[] attributes = constructor.GetCustomAttributes(typeof(AwesomeConstructorAttribute), false);
-                if (attributes != null && attributes.Count() > 0)
+                
+                if (attributes.Any())
                 {
                     constructorToResolve = constructor;
                     break;
