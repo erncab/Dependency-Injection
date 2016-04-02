@@ -19,7 +19,7 @@ namespace DI.PoorMansContainer
             Console.WriteLine("Poor-Man's DI Container Example");
             Console.WriteLine();
 
-            OrderInfo orderInfo = new OrderInfo()
+            OrderInfo orderInfo = new OrderInfo
             {
                 CustomerName = "Miguel Castro",
                 Email = "miguel@dotnetdude.com",

@@ -24,9 +24,15 @@ namespace DI.PoorMansContainer.DIContainer
         public void Register(Type abstractionType, Type concreteType)
         {
             if (!abstractionType.IsInterface)
+            {
                 throw new ApplicationException("First generic argument must be an interface type.");
+            }
 
-            _registrations.Add(new ContainerItem() { AbstractionType = abstractionType, ConcreteType = concreteType });
+            _registrations.Add(new ContainerItem
+            {
+                AbstractionType = abstractionType, 
+                ConcreteType = concreteType
+            });
         }
 
         private readonly List<ContainerItem> _registrations;
@@ -45,11 +51,9 @@ namespace DI.PoorMansContainer.DIContainer
 
         private object GetConcreteType(Type typeToResolve)
         {
-            ContainerItem containerItem = _registrations.Where(item => item.AbstractionType.Equals(typeToResolve)).FirstOrDefault();
-            if (containerItem != null)
-                return GetTypeInstance(containerItem.ConcreteType);
-            else
-                return GetTypeInstance(typeToResolve);
+            ContainerItem containerItem = _registrations.FirstOrDefault(item => item.AbstractionType == typeToResolve);
+
+            return GetTypeInstance(containerItem != null ? containerItem.ConcreteType : typeToResolve);
         }
 
         private object GetTypeInstance(Type type)
@@ -57,15 +61,19 @@ namespace DI.PoorMansContainer.DIContainer
             object instance = null;
 
             ConstructorInfo[] constructors = type.GetConstructors();
+
             if (constructors.Length > 0)
             {
                 ConstructorInfo constructor = constructors[0];
 
                 List<object> constructorArguments = new List<object>();
+
                 ParameterInfo[] parameters = constructor.GetParameters();
+
                 foreach (ParameterInfo parameter in parameters)
                 {
                     object parameterInstance = null;
+
                     if (parameter.ParameterType.IsInterface)
                         // recursion happens here
                         parameterInstance = GetConcreteType(parameter.ParameterType);
