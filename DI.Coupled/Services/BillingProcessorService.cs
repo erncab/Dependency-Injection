@@ -2,7 +2,7 @@ using System;
 
 namespace DI.Coupled.Services
 {
-    public class BillingProcessor
+    public class BillingProcessorService
     {
         public void ProcessPayment(string customer, string creditCard, double price)
         {

@@ -43,17 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\BillingProcessor.cs" />
+    <Compile Include="Services\BillingProcessorServiceService.cs" />
     <Compile Include="Services\InventoryService.cs" />
-    <Compile Include="Services\Logger.cs" />
-    <Compile Include="Services\Notifier.cs" />
+    <Compile Include="Services\LoggerServiceService.cs" />
+    <Compile Include="Services\NotifierServiceService.cs" />
     <Compile Include="CommerceService.cs" />
     <Compile Include="DIContainer\Container.cs" />
     <Compile Include="DIContainer\ContainerItem.cs" />
-    <Compile Include="Services Interfaces\IBillingProcessor.cs" />
+    <Compile Include="Services Interfaces\IBillingProcessorService.cs" />
     <Compile Include="Services Interfaces\IInventoryService.cs" />
-    <Compile Include="Services Interfaces\ILogger.cs" />
-    <Compile Include="Services Interfaces\INotifier.cs" />
+    <Compile Include="Services Interfaces\ILoggerService.cs" />
+    <Compile Include="Services Interfaces\INotifierService.cs" />
     <Compile Include="OrderInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

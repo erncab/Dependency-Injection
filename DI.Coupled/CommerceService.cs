@@ -6,30 +6,30 @@ namespace DI.Coupled
     {
         public CommerceService()
         {
-            _billingProcessor = new BillingProcessor();
+            _billingProcessorService = new BillingProcessorService();
             _inventoryService = new InventoryService();
-            _notifier = new Notifier();
-            _logger = new Logger();
+            _notifierService = new NotifierService();
+            _loggerService = new LoggerService();
         }
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            _billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+            _billingProcessorService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
 
-            _logger.Log("Billing processed");
+            _loggerService.Log("Billing processed");
 
             _inventoryService.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
 
-            _logger.Log("InventoryService updated");
+            _loggerService.Log("InventoryService updated");
 
-            _notifier.SendReceipt(orderInfo);
+            _notifierService.SendReceipt(orderInfo);
 
-            _logger.Log("Receipt sent");
+            _loggerService.Log("Receipt sent");
         }
 
-        private readonly BillingProcessor _billingProcessor;
+        private readonly BillingProcessorService _billingProcessorService;
         private readonly InventoryService _inventoryService;
-        private readonly Notifier _notifier;
-        private readonly Logger _logger;
+        private readonly NotifierService _notifierService;
+        private readonly LoggerService _loggerService;
     }
 }

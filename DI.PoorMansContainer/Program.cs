@@ -11,10 +11,10 @@ namespace DI.PoorMansContainer
         {
             Container container = new Container();
 
-            container.Register<IBillingProcessor, BillingProcessor>();
+            container.Register<IBillingProcessorService, BillingProcessorServiceService>();
             container.Register<IInventoryService, InventoryService>();
-            container.Register<INotifier, Notifier>();
-            container.Register<ILogger, Logger>();
+            container.Register<INotifierService, NotifierServiceService>();
+            container.Register<ILoggerService, LoggerServiceService>();
 
             Console.WriteLine("Poor-Man's DI Container Example");
             Console.WriteLine();

@@ -2,7 +2,7 @@ using System;
 
 namespace DI.Coupled.Services
 {
-    public class Notifier
+    public class NotifierService
     {
         public void SendReceipt(OrderInfo orderInfo)
         {
