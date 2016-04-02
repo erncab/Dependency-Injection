@@ -1,7 +1,7 @@
 using System;
-using DI.Abstraction.Interfaces;
+using DI.Abstraction.Services_Interfaces;
 
-namespace DI.Abstraction.Classes
+namespace DI.Abstraction.Services
 {
     public class Notifier : INotifier
     {

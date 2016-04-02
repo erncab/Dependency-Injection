@@ -1,4 +1,4 @@
-using DI.Coupled.Classes;
+using DI.Coupled.Services;
 
 namespace DI.Coupled
 {
@@ -27,9 +27,9 @@ namespace DI.Coupled
             _logger.Log("Receipt sent");
         }
 
-        readonly BillingProcessor _billingProcessor;
-        readonly InventoryService _inventoryService;
-        readonly Notifier _notifier;
-        readonly Logger _logger;
+        private readonly BillingProcessor _billingProcessor;
+        private readonly InventoryService _inventoryService;
+        private readonly Notifier _notifier;
+        private readonly Logger _logger;
     }
 }

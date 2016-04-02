@@ -1,10 +1,11 @@
 using System;
+using DI.PoorMansContainer.Services_Interfaces;
 
-namespace DI.Coupled.Classes
+namespace DI.PoorMansContainer.Services
 {
-    public class Logger
+    public class Logger : ILogger
     {
-        public void Log(string message)
+        void ILogger.Log(string message)
         {
             // log message to log file
             Console.WriteLine("Log entry @ {0}: {1}", DateTime.Now, message);

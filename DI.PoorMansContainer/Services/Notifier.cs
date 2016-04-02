@@ -1,7 +1,7 @@
 using System;
-using DI.PoorMansContainer.Interfaces;
+using DI.PoorMansContainer.Services_Interfaces;
 
-namespace DI.PoorMansContainer.Classes
+namespace DI.PoorMansContainer.Services
 {
     public class Notifier : INotifier
     {

@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BillingProcessor.cs" />
+    <Compile Include="Services\BillingProcessor.cs" />
     <Compile Include="CommerceService.cs" />
-    <Compile Include="Classes\InventoryService.cs" />
-    <Compile Include="Classes\Logger.cs" />
-    <Compile Include="Classes\Notifier.cs" />
+    <Compile Include="Services\InventoryService.cs" />
+    <Compile Include="Services\Logger.cs" />
+    <Compile Include="Services\Notifier.cs" />
     <Compile Include="OrderInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

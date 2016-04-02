@@ -1,4 +1,4 @@
-namespace DI.PoorMansContainer.Interfaces
+namespace DI.PoorMansContainer.Services_Interfaces
 {
     public interface IInventoryService
     {

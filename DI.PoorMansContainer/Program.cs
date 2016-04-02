@@ -1,7 +1,7 @@
 ﻿using System;
-using DI.PoorMansContainer.Classes;
 using DI.PoorMansContainer.DIContainer;
-using DI.PoorMansContainer.Interfaces;
+using DI.PoorMansContainer.Services;
+using DI.PoorMansContainer.Services_Interfaces;
 
 namespace DI.PoorMansContainer
 {

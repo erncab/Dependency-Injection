@@ -1,4 +1,4 @@
-namespace DI.Abstraction.Interfaces
+namespace DI.PoorMansContainer.Services_Interfaces
 {
     public interface INotifier
     {

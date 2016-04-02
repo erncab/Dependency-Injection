@@ -1,5 +1,5 @@
 ﻿using System;
-using DI.Abstraction.Classes;
+using DI.Abstraction.Services;
 
 namespace DI.Abstraction
 {
@@ -22,10 +22,10 @@ namespace DI.Abstraction
             Console.WriteLine("Production:");
             Console.WriteLine();
 
-            CommerceService commerceService = new CommerceService(new BillingProcessor(), 
-                                             new InventoryService(),
-                                             new Notifier(),
-                                             new Logger());
+            CommerceService commerceService = new CommerceService(   new BillingProcessor(), 
+                                                                     new InventoryService(),
+                                                                     new Notifier(),
+                                                                     new Logger());
 
             commerceService.ProcessOrder(orderInfo);
 

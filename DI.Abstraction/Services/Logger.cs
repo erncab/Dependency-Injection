@@ -1,7 +1,7 @@
 using System;
-using DI.PoorMansContainer.Interfaces;
+using DI.Abstraction.Services_Interfaces;
 
-namespace DI.PoorMansContainer.Classes
+namespace DI.Abstraction.Services
 {
     public class Logger : ILogger
     {

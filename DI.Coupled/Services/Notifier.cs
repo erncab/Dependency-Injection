@@ -1,6 +1,6 @@
 using System;
 
-namespace DI.Coupled.Classes
+namespace DI.Coupled.Services
 {
     public class Notifier
     {

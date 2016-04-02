@@ -1,4 +1,4 @@
-using DI.Abstraction.Interfaces;
+using DI.Abstraction.Services_Interfaces;
 
 namespace DI.Abstraction
 {
@@ -31,9 +31,9 @@ namespace DI.Abstraction
             _logger.Log("Receipt sent");
         }
 
-        readonly IBillingProcessor _billingProcessor;
-        readonly IInventoryService _inventoryService;
-        readonly INotifier _notifier;
-        readonly ILogger _logger;
+        private readonly IBillingProcessor _billingProcessor;
+        private readonly IInventoryService _inventoryService;
+        private readonly INotifier _notifier;
+        private readonly ILogger _logger;
     }
 }

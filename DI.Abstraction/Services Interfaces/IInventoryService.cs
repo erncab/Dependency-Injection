@@ -1,4 +1,4 @@
-namespace DI.Abstraction.Interfaces
+namespace DI.Abstraction.Services_Interfaces
 {
     public interface IInventoryService
     {

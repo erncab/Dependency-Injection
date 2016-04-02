@@ -1,4 +1,4 @@
-namespace DI.PoorMansContainer.Interfaces
+namespace DI.Abstraction.Services_Interfaces
 {
     public interface IBillingProcessor
     {
