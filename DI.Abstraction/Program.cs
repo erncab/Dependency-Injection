@@ -22,7 +22,7 @@ namespace DI.Abstraction
             Console.WriteLine("Production:");
             Console.WriteLine();
             Commerce commerce = new Commerce(new BillingProcessor(), 
-                                             new Customer(),
+                                             new InventoryService(),
                                              new Notifier(),
                                              new Logger());
             commerce.ProcessOrder(orderInfo);

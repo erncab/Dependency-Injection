@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Classes\BillingProcessor.cs" />
     <Compile Include="Commerce.cs" />
-    <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\InventoryService.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\Notifier.cs" />
     <Compile Include="OrderInfo.cs" />

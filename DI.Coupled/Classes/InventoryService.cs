@@ -2,12 +2,12 @@ using System;
 
 namespace DI.Coupled.Classes
 {
-    public class Customer
+    public class InventoryService
     {
         public void UpdateCustomerOrder(string customer, string product)
         {
             // update customer record with purchase
-            Console.WriteLine("Customer record for '{0}' updated with purchase of product '{1}'.", customer, product);
+            Console.WriteLine("InventoryService record for '{0}' updated with purchase of product '{1}'.", customer, product);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace DI.Coupled
         public Commerce()
         {
             _billingProcessor = new BillingProcessor();
-            _customer = new Customer();
+            _inventoryService = new InventoryService();
             _notifier = new Notifier();
             _logger = new Logger();
         }
@@ -18,9 +18,9 @@ namespace DI.Coupled
 
             _logger.Log("Billing processed");
 
-            _customer.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+            _inventoryService.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
 
-            _logger.Log("Customer updated");
+            _logger.Log("InventoryService updated");
 
             _notifier.SendReceipt(orderInfo);
 
@@ -28,7 +28,7 @@ namespace DI.Coupled
         }
 
         readonly BillingProcessor _billingProcessor;
-        readonly Customer _customer;
+        readonly InventoryService _inventoryService;
         readonly Notifier _notifier;
         readonly Logger _logger;
     }
