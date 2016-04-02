@@ -10,15 +10,15 @@ namespace DI.Autofac
             //Program.Container.InjectProperties(this);
         }
 
-        public IProcessorLocator _ProcessorLocator { get; set; }
-        public IEnumerable<IPostOrderPlugin> _Plugins { get; set; }
+        public IProcessorLocator ProcessorLocator { get; set; }
+        public IEnumerable<IPostOrderPlugin> Plugins { get; set; }
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = _ProcessorLocator.GetProcessor<IBillingProcessor>();
-            ICustomerProcessor customerProcessor = _ProcessorLocator.GetProcessor<ICustomerProcessor>();
-            INotificationProcessor notificationProcessor = _ProcessorLocator.GetProcessor<INotificationProcessor>();
-            ILoggingProcessor loggingProcessor = _ProcessorLocator.GetProcessor<ILoggingProcessor>();
+            IBillingProcessor billingProcessor = ProcessorLocator.GetProcessor<IBillingProcessor>();
+            ICustomerProcessor customerProcessor = ProcessorLocator.GetProcessor<ICustomerProcessor>();
+            INotificationProcessor notificationProcessor = ProcessorLocator.GetProcessor<INotificationProcessor>();
+            ILoggingProcessor loggingProcessor = ProcessorLocator.GetProcessor<ILoggingProcessor>();
 
             billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
             loggingProcessor.Log("Billing processed");
@@ -27,7 +27,7 @@ namespace DI.Autofac
             notificationProcessor.SendReceipt(orderInfo);
             loggingProcessor.Log("Receipt sent");
 
-            foreach (IPostOrderPlugin plugin in _Plugins)
+            foreach (IPostOrderPlugin plugin in Plugins)
             {
                 plugin.DoSomething();
             }

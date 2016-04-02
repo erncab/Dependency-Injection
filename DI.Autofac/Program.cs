@@ -9,13 +9,14 @@ using DI.Autofac.Interfaces;
 
 namespace DI.Autofac
 {
-    class Program
+    internal class Program
     {
         public static IContainer Container;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             bool exit = false;
+            
             while (!exit)
             {
                 Console.WriteLine();
@@ -31,7 +32,9 @@ namespace DI.Autofac
                 Console.WriteLine("0 - Exit");
                 Console.WriteLine();
                 Console.Write("Select demo initialization: ");
+                
                 string choice = Console.ReadLine();
+                
                 if (choice == "0")
                     exit = true;
                 else

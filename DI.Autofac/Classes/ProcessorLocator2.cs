@@ -10,20 +10,21 @@ namespace DI.Autofac.Classes
             ((IProcessorLocator2)this).CreateScope();
         }
 
-        ILifetimeScope _Scope = null;
+        private ILifetimeScope _scope;
+
         void IProcessorLocator2.CreateScope()
         {
-            _Scope = Program.Container.BeginLifetimeScope();
+            _scope = Program.Container.BeginLifetimeScope();
         }
 
         T IProcessorLocator2.GetProcessor<T>()
         {
-            return _Scope.Resolve<T>();
+            return _scope.Resolve<T>();
         }
 
         void IProcessorLocator2.ReleaseScope()
         {
-            _Scope.Dispose();
+            _scope.Dispose();
         }
     }
 }

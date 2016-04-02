@@ -4,29 +4,38 @@ namespace DI.Autofac
 {
     public class Commerce2
     {
-        public Commerce2(IBillingProcessorLocator billingProcessorLocator, ICustomerProcessor customer, INotificationProcessor notifier, ILoggingProcessor logger)
+        public Commerce2(
+            IBillingProcessorLocator billingProcessorLocator, 
+            ICustomerProcessor customer, 
+            INotificationProcessor notifier, 
+            ILoggingProcessor logger)
         {
-            _BillingProcessorLocator = billingProcessorLocator;
-            _Customer = customer;
-            _Notifier = notifier;
-            _Logger = logger;
+            _billingProcessorLocator = billingProcessorLocator;
+            _customer = customer;
+            _notifier = notifier;
+            _logger = logger;
         }
 
-        readonly IBillingProcessorLocator _BillingProcessorLocator;
-        readonly ICustomerProcessor _Customer;
-        readonly INotificationProcessor _Notifier;
-        readonly ILoggingProcessor _Logger;
+        private readonly IBillingProcessorLocator _billingProcessorLocator;
+        private readonly ICustomerProcessor _customer;
+        private readonly INotificationProcessor _notifier;
+        private readonly ILoggingProcessor _logger;
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = _BillingProcessorLocator.GetBillingProcessor();
+            IBillingProcessor billingProcessor = _billingProcessorLocator.GetBillingProcessor();
 
             billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
-            _Logger.Log("Billing processed");
-            _Customer.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
-            _Logger.Log("Customer updated");
-            _Notifier.SendReceipt(orderInfo);
-            _Logger.Log("Receipt sent");
+
+            _logger.Log("Billing processed");
+
+            _customer.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+
+            _logger.Log("Customer updated");
+
+            _notifier.SendReceipt(orderInfo);
+
+            _logger.Log("Receipt sent");
         }
     }
 }

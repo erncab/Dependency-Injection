@@ -7,30 +7,36 @@ namespace DI.Autofac
     {
         public Commerce4(IProcessorLocator2 processorLocator, ISingleTester singleTester)
         {
-            _ProcessorLocator = processorLocator;
-            _SingleTester = singleTester;
+            _processorLocator = processorLocator;
+            _singleTester = singleTester;
         }
 
-        readonly IProcessorLocator2 _ProcessorLocator;
-        readonly ISingleTester _SingleTester;
+        private readonly IProcessorLocator2 _processorLocator;
+        private readonly ISingleTester _singleTester;
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = _ProcessorLocator.GetProcessor<IBillingProcessor>();
-            ICustomerProcessor customerProcessor = _ProcessorLocator.GetProcessor<ICustomerProcessor>();
-            INotificationProcessor notificationProcessor = _ProcessorLocator.GetProcessor<INotificationProcessor>();
-            ILoggingProcessor loggingProcessor = _ProcessorLocator.GetProcessor<ILoggingProcessor>();
+            IBillingProcessor billingProcessor = _processorLocator.GetProcessor<IBillingProcessor>();
+            ICustomerProcessor customerProcessor = _processorLocator.GetProcessor<ICustomerProcessor>();
+            INotificationProcessor notificationProcessor = _processorLocator.GetProcessor<INotificationProcessor>();
+            ILoggingProcessor loggingProcessor = _processorLocator.GetProcessor<ILoggingProcessor>();
 
             billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+
             loggingProcessor.Log("Billing processed");
+
             customerProcessor.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+
             loggingProcessor.Log("Customer updated");
+
             notificationProcessor.SendReceipt(orderInfo);
+
             loggingProcessor.Log("Receipt sent");
 
-            _SingleTester.DisplayCounter();
+            _singleTester.DisplayCounter();
 
-            _ProcessorLocator.ReleaseScope();
+            //
+            _processorLocator.ReleaseScope();
         }
     }
 
@@ -41,13 +47,13 @@ namespace DI.Autofac
 
     public class SingleTester : ISingleTester
     {
-        int _Counter = 0;
+        private int _counter;
 
         public void DisplayCounter()
         {
-            _Counter++;
+            _counter++;
 
-            Console.WriteLine("Counter inside class 'SingleTester' is now: {0}", _Counter);
+            Console.WriteLine("Counter inside class 'SingleTester' is now: {0}", _counter);
         }
     }
 }
