@@ -2,9 +2,9 @@ using DI.Abstraction.Interfaces;
 
 namespace DI.Abstraction
 {
-    public class Commerce
+    public class CommerceService
     {
-        public Commerce(
+        public CommerceService(
             IBillingProcessor billingProcessor,
             IInventoryService inventoryService, 
             INotifier notifier, 

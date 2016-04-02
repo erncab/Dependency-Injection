@@ -5,11 +5,12 @@ using DI.PoorMansContainer.Interfaces;
 
 namespace DI.PoorMansContainer
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Container container = new Container();
+
             container.Register<IBillingProcessor, BillingProcessor>();
             container.Register<IInventoryService, InventoryService>();
             container.Register<INotifier, Notifier>();
@@ -30,8 +31,8 @@ namespace DI.PoorMansContainer
             Console.WriteLine("Production:");
             Console.WriteLine();
 
-            Commerce commerce = container.CreateType<Commerce>();
-            commerce.ProcessOrder(orderInfo);
+            CommerceService commerceService = container.CreateType<CommerceService>();
+            commerceService.ProcessOrder(orderInfo);
 
             Console.WriteLine();
             Console.WriteLine("Press [Enter] to exit...");

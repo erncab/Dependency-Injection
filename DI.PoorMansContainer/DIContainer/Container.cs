@@ -9,14 +9,14 @@ namespace DI.PoorMansContainer.DIContainer
     {
         public Container()
         {
-            _Registrations = new List<ContainerItem>();
+            _registrations = new List<ContainerItem>();
         }
 
-        public void Register<T, U>()
-            where U : class, new()
+        public void Register<T, TU>()
+            where TU : class, new()
         {
             Type abstractionType = typeof(T);
-            Type concreteType = typeof(U);
+            Type concreteType = typeof(TU);
 
             Register(abstractionType, concreteType);
         }
@@ -26,10 +26,10 @@ namespace DI.PoorMansContainer.DIContainer
             if (!abstractionType.IsInterface)
                 throw new ApplicationException("First generic argument must be an interface type.");
 
-            _Registrations.Add(new ContainerItem() { AbstractionType = abstractionType, ConcreteType = concreteType });
+            _registrations.Add(new ContainerItem() { AbstractionType = abstractionType, ConcreteType = concreteType });
         }
 
-        readonly List<ContainerItem> _Registrations;
+        private readonly List<ContainerItem> _registrations;
 
         public T CreateType<T>() where T : class
         {
@@ -43,16 +43,16 @@ namespace DI.PoorMansContainer.DIContainer
             return GetConcreteType(type);
         }
 
-        object GetConcreteType(Type typeToResolve)
+        private object GetConcreteType(Type typeToResolve)
         {
-            ContainerItem containerItem = _Registrations.Where(item => item.AbstractionType.Equals(typeToResolve)).FirstOrDefault();
+            ContainerItem containerItem = _registrations.Where(item => item.AbstractionType.Equals(typeToResolve)).FirstOrDefault();
             if (containerItem != null)
                 return GetTypeInstance(containerItem.ConcreteType);
             else
                 return GetTypeInstance(typeToResolve);
         }
 
-        object GetTypeInstance(Type type)
+        private object GetTypeInstance(Type type)
         {
             object instance = null;
 

@@ -22,12 +22,12 @@ namespace DI.Abstraction
             Console.WriteLine("Production:");
             Console.WriteLine();
 
-            Commerce commerce = new Commerce(new BillingProcessor(), 
+            CommerceService commerceService = new CommerceService(new BillingProcessor(), 
                                              new InventoryService(),
                                              new Notifier(),
                                              new Logger());
 
-            commerce.ProcessOrder(orderInfo);
+            commerceService.ProcessOrder(orderInfo);
 
             Console.WriteLine();
             Console.WriteLine("Press [Enter] to exit...");

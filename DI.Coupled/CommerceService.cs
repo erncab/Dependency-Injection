@@ -2,9 +2,9 @@ using DI.Coupled.Classes;
 
 namespace DI.Coupled
 {
-    public class Commerce
+    public class CommerceService
     {
-        public Commerce()
+        public CommerceService()
         {
             _billingProcessor = new BillingProcessor();
             _inventoryService = new InventoryService();

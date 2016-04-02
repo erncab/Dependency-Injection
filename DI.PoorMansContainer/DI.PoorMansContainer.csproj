@@ -47,7 +47,7 @@
     <Compile Include="Classes\InventoryService.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\Notifier.cs" />
-    <Compile Include="Commerce.cs" />
+    <Compile Include="CommerceService.cs" />
     <Compile Include="DIContainer\Container.cs" />
     <Compile Include="DIContainer\ContainerItem.cs" />
     <Compile Include="Interfaces\IBillingProcessor.cs" />

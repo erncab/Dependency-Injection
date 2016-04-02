@@ -18,9 +18,9 @@ namespace DI.Coupled
                 CreditCard = "1234567890"
             };
 
-            Commerce commerce = new Commerce();
+            CommerceService commerceService = new CommerceService();
 
-            commerce.ProcessOrder(orderInfo);
+            commerceService.ProcessOrder(orderInfo);
 
             Console.WriteLine();
             Console.WriteLine("Press [Enter] to exit...");
