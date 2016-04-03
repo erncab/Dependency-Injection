@@ -3,26 +3,26 @@ using DI.Autofac.Interfaces;
 
 namespace DI.Autofac.Classes
 {
-    public class ProcessorLocator2 : IProcessorLocator2
+    public class ServiceLocator2 : IServiceLocator2
     {
-        public ProcessorLocator2()
-        {
-            ((IProcessorLocator2)this).CreateScope();
-        }
-
         private ILifetimeScope _scope;
 
-        void IProcessorLocator2.CreateScope()
+        void IServiceLocator2.CreateScope()
         {
             _scope = Program.Container.BeginLifetimeScope();
         }
 
-        T IProcessorLocator2.GetProcessor<T>()
+        public ServiceLocator2()
+        {
+            ((IServiceLocator2)this).CreateScope();
+        }
+
+        T IServiceLocator2.GetInstance<T>()
         {
             return _scope.Resolve<T>();
         }
 
-        void IProcessorLocator2.ReleaseScope()
+        void IServiceLocator2.ReleaseScope()
         {
             _scope.Dispose();
         }

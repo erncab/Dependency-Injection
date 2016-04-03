@@ -1,9 +1,9 @@
 namespace DI.Autofac.Interfaces
 {
-    public interface IProcessorLocator2
+    public interface IServiceLocator2
     {
         void CreateScope();
-        T GetProcessor<T>();
+        T GetInstance<T>();
         void ReleaseScope();
     }
 }

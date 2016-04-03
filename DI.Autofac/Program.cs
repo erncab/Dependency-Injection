@@ -60,10 +60,10 @@ namespace DI.Autofac
                             #region regular container usage
 
                             builder.RegisterType<Commerce1>();
-                            builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
-                            builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
-                            builder.RegisterType<NotificationProcessor>().As<INotificationProcessor>();
-                            builder.RegisterType<LoggingProcessor>().As<ILoggingProcessor>();
+                            builder.RegisterType<BillingService>().As<IBillingService>();
+                            builder.RegisterType<InventoryService>().As<IInventoryService>();
+                            builder.RegisterType<NotificationService>().As<INotificationService>();
+                            builder.RegisterType<LoggingService>().As<ILoggingService>();
                             
                             Container = builder.Build();
 
@@ -79,10 +79,11 @@ namespace DI.Autofac
                             #region specific service locator (Commerce2)
                             
                             builder.RegisterType<Commerce2>();
-                            builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
-                            builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
-                            builder.RegisterType<NotificationProcessor>().As<INotificationProcessor>();
-                            builder.RegisterType<LoggingProcessor>().As<ILoggingProcessor>();
+                            builder.RegisterType<BillingService>().As<IBillingService>();
+                            builder.RegisterType<InventoryService>().As<IInventoryService>();
+                            builder.RegisterType<NotificationService>().As<INotificationService>();
+                            builder.RegisterType<LoggingService>().As<ILoggingService>();
+
                             builder.RegisterType<BillingProcessorLocator>().As<IBillingProcessorLocator>();
 
                             Container = builder.Build();
@@ -99,11 +100,13 @@ namespace DI.Autofac
                             #region general service locator (Commerce3)
                             
                             builder.RegisterType<Commerce3>();
-                            builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
-                            builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
-                            builder.RegisterType<NotificationProcessor>().As<INotificationProcessor>();
-                            builder.RegisterType<LoggingProcessor>().As<ILoggingProcessor>();
-                            builder.RegisterType<ProcessorLocator>().As<IProcessorLocator>();
+
+                            builder.RegisterType<BillingService>().As<IBillingService>();
+                            builder.RegisterType<InventoryService>().As<IInventoryService>();
+                            builder.RegisterType<NotificationService>().As<INotificationService>();
+                            builder.RegisterType<LoggingService>().As<ILoggingService>();
+
+                            builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
 
                             Container = builder.Build();
 
@@ -119,11 +122,11 @@ namespace DI.Autofac
                             #region lifetime scope & singleton (Commerce4)
                             
                             builder.RegisterType<Commerce4>();
-                            builder.RegisterType<BillingProcessor>().As<IBillingProcessor>().InstancePerLifetimeScope();
-                            builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>().InstancePerLifetimeScope();
-                            builder.RegisterType<NotificationProcessor>().As<INotificationProcessor>().InstancePerLifetimeScope();
-                            builder.RegisterType<LoggingProcessor>().As<ILoggingProcessor>().InstancePerLifetimeScope();
-                            builder.RegisterType<ProcessorLocator2>().As<IProcessorLocator2>();
+                            builder.RegisterType<BillingService>().As<IBillingService>().InstancePerLifetimeScope();
+                            builder.RegisterType<InventoryService>().As<IInventoryService>().InstancePerLifetimeScope();
+                            builder.RegisterType<NotificationService>().As<INotificationService>().InstancePerLifetimeScope();
+                            builder.RegisterType<LoggingService>().As<ILoggingService>().InstancePerLifetimeScope();
+                            builder.RegisterType<ServiceLocator2>().As<IServiceLocator2>();
                             builder.RegisterType<SingleTester>().As<ISingleTester>().SingleInstance();
 
                             Container = builder.Build();
@@ -190,11 +193,11 @@ namespace DI.Autofac
                             #region one-to-many (Commerce7)
                             
                             builder.RegisterType<Commerce7>();
-                            builder.RegisterType<BillingProcessor>().As<IBillingProcessor>();
-                            builder.RegisterType<CustomerProcessor>().As<ICustomerProcessor>();
-                            builder.RegisterType<NotificationProcessor>().As<INotificationProcessor>();
-                            builder.RegisterType<LoggingProcessor>().As<ILoggingProcessor>();
-                            builder.RegisterType<ProcessorLocator>().As<IProcessorLocator>();
+                            builder.RegisterType<BillingService>().As<IBillingService>();
+                            builder.RegisterType<InventoryService>().As<IInventoryService>();
+                            builder.RegisterType<NotificationService>().As<INotificationService>();
+                            builder.RegisterType<LoggingService>().As<ILoggingService>();
+                            builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.StartsWith("Plugin"))
                                 .As<IPostOrderPlugin>();
@@ -219,7 +222,7 @@ namespace DI.Autofac
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.StartsWith("Plugin"))
                                 .As<IPostOrderPlugin>();
-                            builder.RegisterType<ProcessorLocator>().As<IProcessorLocator>();
+                            builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
                             
                             Container = builder.Build();
 
@@ -255,7 +258,7 @@ namespace DI.Autofac
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.StartsWith("Plugin"))
                                 .As<IPostOrderPlugin>();
-                            builder.RegisterType<ProcessorLocator>().As<IProcessorLocator>();
+                            builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
 
                             Container = builder.Build();
 

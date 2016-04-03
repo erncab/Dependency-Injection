@@ -5,9 +5,9 @@ namespace DI.Autofac.Classes
 {
     public class BillingProcessorLocator : IBillingProcessorLocator
     {
-        IBillingProcessor IBillingProcessorLocator.GetBillingProcessor()
+        IBillingService IBillingProcessorLocator.GetBillingProcessor()
         {
-            return Program.Container.Resolve<IBillingProcessor>();
+            return Program.Container.Resolve<IBillingService>();
         }
     }
 }

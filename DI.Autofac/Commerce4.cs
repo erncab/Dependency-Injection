@@ -5,38 +5,38 @@ namespace DI.Autofac
 {
     public class Commerce4
     {
-        public Commerce4(IProcessorLocator2 processorLocator, ISingleTester singleTester)
+        public Commerce4(IServiceLocator2 serviceLocator, ISingleTester singleTester)
         {
-            _processorLocator = processorLocator;
+            _serviceLocator = serviceLocator;
             _singleTester = singleTester;
         }
 
-        private readonly IProcessorLocator2 _processorLocator;
+        private readonly IServiceLocator2 _serviceLocator;
         private readonly ISingleTester _singleTester;
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = _processorLocator.GetProcessor<IBillingProcessor>();
-            ICustomerProcessor customerProcessor = _processorLocator.GetProcessor<ICustomerProcessor>();
-            INotificationProcessor notificationProcessor = _processorLocator.GetProcessor<INotificationProcessor>();
-            ILoggingProcessor loggingProcessor = _processorLocator.GetProcessor<ILoggingProcessor>();
+            IBillingService billingService = _serviceLocator.GetInstance<IBillingService>();
+            IInventoryService inventoryService = _serviceLocator.GetInstance<IInventoryService>();
+            INotificationService notificationService = _serviceLocator.GetInstance<INotificationService>();
+            ILoggingService loggingService = _serviceLocator.GetInstance<ILoggingService>();
 
-            billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+            billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
 
-            loggingProcessor.Log("Billing processed");
+            loggingService.Log("Billing processed");
 
-            customerProcessor.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+            inventoryService.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
 
-            loggingProcessor.Log("Customer updated");
+            loggingService.Log("Customer updated");
 
-            notificationProcessor.SendReceipt(orderInfo);
+            notificationService.SendReceipt(orderInfo);
 
-            loggingProcessor.Log("Receipt sent");
+            loggingService.Log("Receipt sent");
 
             _singleTester.DisplayCounter();
 
             //
-            _processorLocator.ReleaseScope();
+            _serviceLocator.ReleaseScope();
         }
     }
 

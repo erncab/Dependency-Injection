@@ -1,6 +1,6 @@
 namespace DI.Autofac.Interfaces
 {
-    public interface IBillingProcessor
+    public interface IBillingService
     {
         void ProcessPayment(string customer, string creditCard, double price);
     }

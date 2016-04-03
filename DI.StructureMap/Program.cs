@@ -5,11 +5,12 @@ using StructureMap;
 
 namespace DI.StructureMap
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Container container = new Container(); // requires full .NET 4 targetted framework
+
             container.Configure(reg => reg.For<IBillingProcessor>().Use<BillingProcessor>());
             container.Configure(reg => reg.For<ICustomer>().Use<Customer>());
             container.Configure(reg => reg.For<INotifier>().Use<Notifier>());
@@ -31,6 +32,7 @@ namespace DI.StructureMap
             Console.WriteLine();
 
             Commerce commerce = container.GetInstance<Commerce>();
+
             commerce.ProcessOrder(orderInfo);
 
             Console.WriteLine();

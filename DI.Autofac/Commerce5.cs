@@ -5,25 +5,25 @@ namespace DI.Autofac
     public class Commerce5
     {
         public Commerce5(
-            IBillingProcessor billingProcessor, 
-            ICustomerProcessor customer, 
-            INotificationProcessor notifier, 
-            ILoggingProcessor logger)
+            IBillingService billingService, 
+            IInventoryService customer, 
+            INotificationService notifier, 
+            ILoggingService logger)
         {
-            _billingProcessor = billingProcessor;
+            _billingService = billingService;
             _customer = customer;
             _notifier = notifier;
             _logger = logger;
         }
 
-        private readonly IBillingProcessor _billingProcessor;
-        private readonly ICustomerProcessor _customer;
-        private readonly INotificationProcessor _notifier;
-        private readonly ILoggingProcessor _logger;
+        private readonly IBillingService _billingService;
+        private readonly IInventoryService _customer;
+        private readonly INotificationService _notifier;
+        private readonly ILoggingService _logger;
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            _billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+            _billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
             _logger.Log("Billing processed");
             _customer.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
             _logger.Log("Customer updated");

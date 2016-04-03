@@ -1,6 +1,6 @@
 namespace DI.Autofac.Interfaces
 {
-    public interface ILoggingProcessor
+    public interface ILoggingService
     {
         void Log(string message);
     }

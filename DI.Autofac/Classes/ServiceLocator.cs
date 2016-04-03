@@ -3,9 +3,9 @@ using DI.Autofac.Interfaces;
 
 namespace DI.Autofac.Classes
 {
-    public class ProcessorLocator : IProcessorLocator
+    public class ServiceLocator : IServiceLocator
     {
-        T IProcessorLocator.GetProcessor<T>()
+        T IServiceLocator.GetInstance<T>()
         {
             return Program.Container.Resolve<T>();
         }

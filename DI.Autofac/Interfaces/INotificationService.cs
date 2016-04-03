@@ -1,6 +1,6 @@
 namespace DI.Autofac.Interfaces
 {
-    public interface INotificationProcessor
+    public interface INotificationService
     {
         void SendReceipt(OrderInfo orderInfo);
     }

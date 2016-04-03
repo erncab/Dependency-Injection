@@ -3,9 +3,9 @@ using DI.Autofac.Interfaces;
 
 namespace DI.Autofac.Classes
 {
-    public class NotificationProcessor : INotificationProcessor
+    public class NotificationService : INotificationService
     {
-        void INotificationProcessor.SendReceipt(OrderInfo orderInfo)
+        void INotificationService.SendReceipt(OrderInfo orderInfo)
         {
             // send email to customer with receipt
             Console.WriteLine("Receipt sent to customer '{0}' via email.", orderInfo.CustomerName);

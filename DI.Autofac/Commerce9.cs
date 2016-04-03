@@ -7,10 +7,10 @@ namespace DI.Autofac
     {
         [AwesomeConstructor]
         public Commerce9(
-            IProcessorLocator processorLocator, 
+            IServiceLocator serviceLocator, 
             IEnumerable<IPostOrderPlugin> plugins)
         {
-            _processorLocator = processorLocator;
+            _serviceLocator = serviceLocator;
             _plugins = plugins;
         }
 
@@ -18,22 +18,22 @@ namespace DI.Autofac
         {
         }
 
-        private readonly IProcessorLocator _processorLocator;
+        private readonly IServiceLocator _serviceLocator;
         private readonly IEnumerable<IPostOrderPlugin> _plugins;
         
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = _processorLocator.GetProcessor<IBillingProcessor>();
-            ICustomerProcessor customerProcessor = _processorLocator.GetProcessor<ICustomerProcessor>();
-            INotificationProcessor notificationProcessor = _processorLocator.GetProcessor<INotificationProcessor>();
-            ILoggingProcessor loggingProcessor = _processorLocator.GetProcessor<ILoggingProcessor>();
+            IBillingService billingService = _serviceLocator.GetInstance<IBillingService>();
+            IInventoryService inventoryService = _serviceLocator.GetInstance<IInventoryService>();
+            INotificationService notificationService = _serviceLocator.GetInstance<INotificationService>();
+            ILoggingService loggingService = _serviceLocator.GetInstance<ILoggingService>();
 
-            billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
-            loggingProcessor.Log("Billing processed");
-            customerProcessor.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
-            loggingProcessor.Log("Customer updated");
-            notificationProcessor.SendReceipt(orderInfo);
-            loggingProcessor.Log("Receipt sent");
+            billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+            loggingService.Log("Billing processed");
+            inventoryService.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+            loggingService.Log("Customer updated");
+            notificationService.SendReceipt(orderInfo);
+            loggingService.Log("Receipt sent");
 
             foreach (IPostOrderPlugin plugin in _plugins)
             {

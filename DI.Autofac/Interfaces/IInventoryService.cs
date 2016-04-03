@@ -1,6 +1,6 @@
 namespace DI.Autofac.Interfaces
 {
-    public interface ICustomerProcessor
+    public interface IInventoryService
     {
         void UpdateCustomerOrder(string customer, string product);
     }

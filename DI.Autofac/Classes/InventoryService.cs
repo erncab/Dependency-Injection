@@ -3,9 +3,9 @@ using DI.Autofac.Interfaces;
 
 namespace DI.Autofac.Classes
 {
-    public class CustomerProcessor : ICustomerProcessor
+    public class InventoryService : IInventoryService
     {
-        void ICustomerProcessor.UpdateCustomerOrder(string customer, string product)
+        void IInventoryService.UpdateCustomerOrder(string customer, string product)
         {
             // update customer record with purchase
             Console.WriteLine("Customer record for '{0}' updated with purchase of product '{1}'.", customer, product);

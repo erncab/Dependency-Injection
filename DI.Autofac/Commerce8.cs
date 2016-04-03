@@ -10,22 +10,22 @@ namespace DI.Autofac
             //Program.Container.InjectProperties(this);
         }
 
-        public IProcessorLocator ProcessorLocator { get; set; }
+        public IServiceLocator ServiceLocator { get; set; }
         public IEnumerable<IPostOrderPlugin> Plugins { get; set; }
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = ProcessorLocator.GetProcessor<IBillingProcessor>();
-            ICustomerProcessor customerProcessor = ProcessorLocator.GetProcessor<ICustomerProcessor>();
-            INotificationProcessor notificationProcessor = ProcessorLocator.GetProcessor<INotificationProcessor>();
-            ILoggingProcessor loggingProcessor = ProcessorLocator.GetProcessor<ILoggingProcessor>();
+            IBillingService billingService = ServiceLocator.GetInstance<IBillingService>();
+            IInventoryService inventoryService = ServiceLocator.GetInstance<IInventoryService>();
+            INotificationService notificationService = ServiceLocator.GetInstance<INotificationService>();
+            ILoggingService loggingService = ServiceLocator.GetInstance<ILoggingService>();
 
-            billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
-            loggingProcessor.Log("Billing processed");
-            customerProcessor.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
-            loggingProcessor.Log("Customer updated");
-            notificationProcessor.SendReceipt(orderInfo);
-            loggingProcessor.Log("Receipt sent");
+            billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+            loggingService.Log("Billing processed");
+            inventoryService.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+            loggingService.Log("Customer updated");
+            notificationService.SendReceipt(orderInfo);
+            loggingService.Log("Receipt sent");
 
             foreach (IPostOrderPlugin plugin in Plugins)
             {

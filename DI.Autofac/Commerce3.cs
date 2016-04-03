@@ -4,31 +4,27 @@ namespace DI.Autofac
 {
     public class Commerce3
     {
-        public Commerce3(IProcessorLocator processorLocator)
-        {
-            _processorLocator = processorLocator;
-        }
+        private readonly IServiceLocator _serviceLocator;
 
-        private readonly IProcessorLocator _processorLocator;
+        public Commerce3(IServiceLocator serviceLocator)
+        {
+            _serviceLocator = serviceLocator;
+        }
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingProcessor billingProcessor = _processorLocator.GetProcessor<IBillingProcessor>();
-            ICustomerProcessor customerProcessor = _processorLocator.GetProcessor<ICustomerProcessor>();
-            INotificationProcessor notificationProcessor = _processorLocator.GetProcessor<INotificationProcessor>();
-            ILoggingProcessor loggingProcessor = _processorLocator.GetProcessor<ILoggingProcessor>();
+            // On-demand instantiation of the processors if they're actually needed.
+            IBillingService billingService = _serviceLocator.GetInstance<IBillingService>();
+            IInventoryService inventoryService = _serviceLocator.GetInstance<IInventoryService>();
+            INotificationService notificationService = _serviceLocator.GetInstance<INotificationService>();
+            ILoggingService loggingService = _serviceLocator.GetInstance<ILoggingService>();
 
-            billingProcessor.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
-
-            loggingProcessor.Log("Billing processed");
-
-            customerProcessor.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
-
-            loggingProcessor.Log("Customer updated");
-
-            notificationProcessor.SendReceipt(orderInfo);
-
-            loggingProcessor.Log("Receipt sent");
+            billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
+            loggingService.Log("Billing processed");
+            inventoryService.UpdateCustomerOrder(orderInfo.CustomerName, orderInfo.Product);
+            loggingService.Log("Customer updated");
+            notificationService.SendReceipt(orderInfo);
+            loggingService.Log("Receipt sent");
         }
     }
 }
