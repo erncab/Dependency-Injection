@@ -122,11 +122,14 @@ namespace DI.Autofac
                             #region lifetime scope & singleton (Commerce4)
                             
                             builder.RegisterType<Commerce4>();
+
                             builder.RegisterType<BillingService>().As<IBillingService>().InstancePerLifetimeScope();
                             builder.RegisterType<InventoryService>().As<IInventoryService>().InstancePerLifetimeScope();
                             builder.RegisterType<NotificationService>().As<INotificationService>().InstancePerLifetimeScope();
                             builder.RegisterType<LoggingService>().As<ILoggingService>().InstancePerLifetimeScope();
                             builder.RegisterType<ServiceLocator2>().As<IServiceLocator2>();
+
+                            //builder.RegisterType<SingleTester>().As<ISingleTester>();
                             builder.RegisterType<SingleTester>().As<ISingleTester>().SingleInstance();
 
                             Container = builder.Build();
@@ -142,7 +145,6 @@ namespace DI.Autofac
                             #endregion
 
                             Commerce4 commerce4 = Container.Resolve<Commerce4>();
-
                             commerce4.ProcessOrder(orderInfo);
 
                             Console.WriteLine("Press 'Enter' to process again...");

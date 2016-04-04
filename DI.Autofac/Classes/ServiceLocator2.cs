@@ -7,14 +7,15 @@ namespace DI.Autofac.Classes
     {
         private ILifetimeScope _scope;
 
-        void IServiceLocator2.CreateScope()
-        {
-            _scope = Program.Container.BeginLifetimeScope();
-        }
-
         public ServiceLocator2()
         {
             ((IServiceLocator2)this).CreateScope();
+        }
+
+
+        void IServiceLocator2.CreateScope()
+        {
+            _scope = Program.Container.BeginLifetimeScope();
         }
 
         T IServiceLocator2.GetInstance<T>()
