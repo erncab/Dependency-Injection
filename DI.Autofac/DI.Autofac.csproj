@@ -54,7 +54,7 @@
     <Compile Include="Classes\InventoryService.cs" />
     <Compile Include="Classes\LoggingService.cs" />
     <Compile Include="Classes\NotificationService.cs" />
-    <Compile Include="Classes\BillingProcessorLocator.cs" />
+    <Compile Include="Classes\BillingServiceLocator.cs" />
     <Compile Include="Classes\Plugins\Plugin1.cs" />
     <Compile Include="Classes\Plugins\Plugin2.cs" />
     <Compile Include="Classes\Plugins\Plugin3.cs" />
@@ -70,7 +70,7 @@
     <Compile Include="Commerce3.cs" />
     <Compile Include="Commerce2.cs" />
     <Compile Include="Interfaces\IBillingService.cs" />
-    <Compile Include="Interfaces\IBillingProcessorLocator.cs" />
+    <Compile Include="Interfaces\IBillingServiceLocator.cs" />
     <Compile Include="Interfaces\IInventoryService.cs" />
     <Compile Include="Interfaces\ILoggingService.cs" />
     <Compile Include="Interfaces\INotificationService.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Interfaces\IServiceLocator.cs" />
     <Compile Include="Interfaces\IServiceLocator2.cs" />
     <Compile Include="OrderInfo.cs" />
-    <Compile Include="ProcessorRegistrationModule.cs" />
+    <Compile Include="ServicesRegistrationModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

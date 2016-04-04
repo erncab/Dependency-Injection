@@ -15,6 +15,7 @@ namespace DI.Autofac.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             ContainerBuilder builder = new ContainerBuilder();
+
             builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>();
             builder.RegisterType<CustomerListViewModel>().As<ICustomerListViewModel>();
             builder.RegisterType<CustomerViewModel>().As<ICustomerViewModel>();

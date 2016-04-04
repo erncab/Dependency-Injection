@@ -15,7 +15,7 @@ namespace DI.Autofac.WPF.ViewModels
             _customersModel = customerRepository.GetAll();
         }
 
-        readonly List<Customer> _customersModel;
+        private readonly List<Customer> _customersModel;
 
         public List<Customer> CustomersModel
         {

@@ -5,21 +5,21 @@ namespace DI.Autofac
 {
     public class Commerce4
     {
-        private readonly IServiceLocator2 _serviceLocator;
+        private readonly IServiceLocator2 _iaaaServiceLocator;
         private readonly ISingleTester _singleTester;
 
-        public Commerce4(IServiceLocator2 serviceLocator, ISingleTester singleTester)
+        public Commerce4(IServiceLocator2 iaaaServiceLocator, ISingleTester singleTester)
         {
-            _serviceLocator = serviceLocator;
+            _iaaaServiceLocator = iaaaServiceLocator;
             _singleTester = singleTester;
         }
 
         public void ProcessOrder(OrderInfo orderInfo)
         {
-            IBillingService billingService = _serviceLocator.GetInstance<IBillingService>();
-            IInventoryService inventoryService = _serviceLocator.GetInstance<IInventoryService>();
-            INotificationService notificationService = _serviceLocator.GetInstance<INotificationService>();
-            ILoggingService loggingService = _serviceLocator.GetInstance<ILoggingService>();
+            IBillingService billingService = _iaaaServiceLocator.GetInstance<IBillingService>();
+            IInventoryService inventoryService = _iaaaServiceLocator.GetInstance<IInventoryService>();
+            INotificationService notificationService = _iaaaServiceLocator.GetInstance<INotificationService>();
+            ILoggingService loggingService = _iaaaServiceLocator.GetInstance<ILoggingService>();
 
             billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
             loggingService.Log("Billing processed");
@@ -31,7 +31,7 @@ namespace DI.Autofac
             _singleTester.DisplayCounter();
 
             //
-            _serviceLocator.ReleaseScope();
+            _iaaaServiceLocator.ReleaseScope();
         }
     }
 

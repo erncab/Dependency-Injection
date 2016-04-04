@@ -84,7 +84,7 @@ namespace DI.Autofac
                             builder.RegisterType<NotificationService>().As<INotificationService>();
                             builder.RegisterType<LoggingService>().As<ILoggingService>();
 
-                            builder.RegisterType<BillingProcessorLocator>().As<IBillingProcessorLocator>();
+                            builder.RegisterType<BillingServiceLocator>().As<IBillingServiceLocator>();
 
                             Container = builder.Build();
 
@@ -161,8 +161,9 @@ namespace DI.Autofac
                             #region assembly scanning (Commerce5)
                             
                             builder.RegisterType<Commerce5>();
+
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                                .Where(t => t.Name.EndsWith("Processor"))
+                                .Where(t => t.Name.EndsWith("Service"))
                                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
 
                             Container = builder.Build();
@@ -179,7 +180,8 @@ namespace DI.Autofac
                             #region module usage (Commerce6)
                             
                             builder.RegisterType<Commerce6>();
-                            builder.RegisterModule<ProcessorRegistrationModule>();
+
+                            builder.RegisterModule<ServicesRegistrationModule>();
 
                             Container = builder.Build();
 
@@ -195,11 +197,24 @@ namespace DI.Autofac
                             #region one-to-many (Commerce7)
                             
                             builder.RegisterType<Commerce7>();
-                            builder.RegisterType<BillingService>().As<IBillingService>();
-                            builder.RegisterType<InventoryService>().As<IInventoryService>();
-                            builder.RegisterType<NotificationService>().As<INotificationService>();
-                            builder.RegisterType<LoggingService>().As<ILoggingService>();
+
+                            // Individual types' registrations
+                            //builder.RegisterType<BillingService>().As<IBillingService>();
+                            //builder.RegisterType<InventoryService>().As<IInventoryService>();
+                            //builder.RegisterType<NotificationService>().As<INotificationService>();
+                            //builder.RegisterType<LoggingService>().As<ILoggingService>();
+
+                            // Assembly types' registration
+                            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                                .Where(t => t.Name.EndsWith("Service"))
+                                .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
+
+                            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                            //    .Where(t => t.Name.StartsWith("Service"))
+                            //    .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
+
                             builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
+
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.StartsWith("Plugin"))
                                 .As<IPostOrderPlugin>();
@@ -217,19 +232,22 @@ namespace DI.Autofac
                         case "8":
                             #region post-construction resolve & property injection (Commerce8)
                             
-                            builder.RegisterType<Commerce8>().PropertiesAutowired();
+                            //builder.RegisterType<Commerce8>().PropertiesAutowired();
+
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                                .Where(t => t.Name.EndsWith("Processor"))
+                                .Where(t => t.Name.EndsWith("Service"))
                                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
+
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.StartsWith("Plugin"))
                                 .As<IPostOrderPlugin>();
+
                             builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
                             
                             Container = builder.Build();
 
-                            //Commerce8 commerce8 = new Commerce8();
-                            Commerce8 commerce8 = Container.Resolve<Commerce8>();
+                            Commerce8 commerce8 = new Commerce8();
+                            //Commerce8 commerce8 = Container.Resolve<Commerce8>();
 
                             commerce8.ProcessOrder(orderInfo);
                             
@@ -245,21 +263,25 @@ namespace DI.Autofac
                             //new NamedParameter("b", 1),
                             //new NamedParameter("c", 1), 
                             //new NamedParameter("d", 1) });
-                            #region fix
                             
-                            builder.RegisterType<Commerce9>().WithParameters(new List<Parameter>() {
-                                new NamedParameter("a", 1), 
-                                new NamedParameter("b", 1),
-                                new NamedParameter("c", 1), 
-                                new NamedParameter("d", 1) }).FindConstructorsWith(new AwesomeConstructorFinder());
+                            #region fix
+                            builder.RegisterType<Commerce9>().WithParameters(
+                                new List<Parameter> {
+                                    new NamedParameter("a", 1), 
+                                    new NamedParameter("b", 1),
+                                    new NamedParameter("c", 1), 
+                                    new NamedParameter("d", 1) 
+                                }).FindConstructorsWith(new AwesomeConstructorFinder());
                             #endregion
                             
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                                .Where(t => t.Name.EndsWith("Processor"))
+                                .Where(t => t.Name.EndsWith("Service"))
                                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
+                            
                             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                                 .Where(t => t.Name.StartsWith("Plugin"))
                                 .As<IPostOrderPlugin>();
+                            
                             builder.RegisterType<ServiceLocator>().As<IServiceLocator>();
 
                             Container = builder.Build();

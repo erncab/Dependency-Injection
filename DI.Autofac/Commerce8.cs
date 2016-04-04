@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Autofac;
 using DI.Autofac.Interfaces;
 
 namespace DI.Autofac
@@ -7,7 +8,7 @@ namespace DI.Autofac
     {
         public Commerce8()
         {
-            //Program.Container.InjectProperties(this);
+            Program.Container.InjectProperties(this);
         }
 
         public IServiceLocator ServiceLocator { get; set; }

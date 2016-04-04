@@ -14,10 +14,10 @@ namespace DependencyInjection.Autofac.MVC.Services
 
         public List<Customer> GetAll()
         {
-            List<Customer> customers = new List<Customer>()
-                {
-                    new Customer() { Id = 1, Name = "Miguel A. Castro", Email = "miguel@dotnetdude.com", Twitter = "@miguelcastro67" },
-                    new Customer() { Id = 2, Name = "John V. Petersen", Email = "johnvpetersen@gmail.com", Twitter = "@johnvpetersen" },
+            List<Customer> customers = new List<Customer>
+            {
+                    new Customer { Id = 1, Name = "Miguel A. Castro", Email = "miguel@dotnetdude.com", Twitter = "@miguelcastro67" },
+                    new Customer { Id = 2, Name = "John V. Petersen", Email = "johnvpetersen@gmail.com", Twitter = "@johnvpetersen" },
                 };
 
             return customers;

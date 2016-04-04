@@ -7,7 +7,7 @@ namespace DependencyInjection.Autofac.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        ICustomerRepository _CustomerRepository;
+        private ICustomerRepository _customerRepository;
 
         public HomeController(ICustomerRepository customerRepository)
         {
@@ -35,13 +35,13 @@ namespace DependencyInjection.Autofac.MVC.Controllers
 
         public ActionResult Customers()
         {
-            IEnumerable<Customer> customers = _CustomerRepository.GetAll();
+            IEnumerable<Customer> customers = _customerRepository.GetAll();
             return View(customers);
         }
 
         public ActionResult Customer(int id)
         {
-            Customer customer = _CustomerRepository.GetById(id);
+            Customer customer = _customerRepository.GetById(id);
             return View(customer);
         }
     }

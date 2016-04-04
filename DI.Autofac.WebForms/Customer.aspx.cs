@@ -12,6 +12,7 @@ namespace DI.WebForms
         protected void Page_Load(object sender, EventArgs e)
         {
             string value = Request.QueryString["id"];
+
             if (string.IsNullOrWhiteSpace(value))
                 value = "1";
 

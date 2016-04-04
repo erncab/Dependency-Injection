@@ -10,7 +10,7 @@ namespace DI.Autofac.WPF.ViewModels
             _viewModel = viewModel;
         }
 
-        readonly MainWindowViewModel _viewModel;
+        private readonly MainWindowViewModel _viewModel;
 
         public bool CanExecute(object parameter)
         {

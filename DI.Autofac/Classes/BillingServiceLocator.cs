@@ -3,9 +3,9 @@ using DI.Autofac.Interfaces;
 
 namespace DI.Autofac.Classes
 {
-    public class BillingProcessorLocator : IBillingProcessorLocator
+    public class BillingServiceLocator : IBillingServiceLocator
     {
-        IBillingService IBillingProcessorLocator.GetBillingProcessor()
+        IBillingService IBillingServiceLocator.GetBillingService()
         {
             return Program.Container.Resolve<IBillingService>();
         }

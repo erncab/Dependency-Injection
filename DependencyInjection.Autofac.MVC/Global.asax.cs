@@ -20,8 +20,8 @@ namespace DependencyInjection.Autofac.MVC
             ContainerBuilder builder = new ContainerBuilder();
 
             builder.RegisterType<CustomerRepository>().As<ICustomerRepository>();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                .Where(t => t.Name.EndsWith("Controller"));
+
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("Controller"));
 
             IContainer container = builder.Build();
 

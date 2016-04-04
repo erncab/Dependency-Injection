@@ -5,18 +5,18 @@ namespace DI.Autofac
     public class Commerce2
     {
         public Commerce2(
-            IBillingProcessorLocator billingProcessorLocator, 
+            IBillingServiceLocator billingServiceLocator, 
             IInventoryService customer, 
             INotificationService notifier, 
             ILoggingService logger)
         {
-            _billingProcessorLocator = billingProcessorLocator;
+            _billingServiceLocator = billingServiceLocator;
             _customer = customer;
             _notifier = notifier;
             _logger = logger;
         }
 
-        private readonly IBillingProcessorLocator _billingProcessorLocator;
+        private readonly IBillingServiceLocator _billingServiceLocator;
         private readonly IInventoryService _customer;
         private readonly INotificationService _notifier;
         private readonly ILoggingService _logger;
@@ -24,7 +24,7 @@ namespace DI.Autofac
         public void ProcessOrder(OrderInfo orderInfo)
         {
             // On-demand instantiation.
-            IBillingService billingService = _billingProcessorLocator.GetBillingProcessor();
+            IBillingService billingService = _billingServiceLocator.GetBillingService();
 
             billingService.ProcessPayment(orderInfo.CustomerName, orderInfo.CreditCard, orderInfo.Price);
             _logger.Log("Billing processed");
