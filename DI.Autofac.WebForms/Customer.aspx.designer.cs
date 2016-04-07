@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DI.WebForms {
+namespace DI.Autofac.WebForms {
     
     
     public partial class Customer1 {

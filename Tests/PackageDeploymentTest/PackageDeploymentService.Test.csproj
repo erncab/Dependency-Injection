@@ -52,7 +52,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="FWServicesDeploymentTest.cs" />
+    <Compile Include="Tests\CopyFilesActionTest.cs" />
+    <Compile Include="Tests\FWServicesDeploymentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

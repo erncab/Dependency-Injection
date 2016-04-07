@@ -60,6 +60,11 @@ namespace PackageDeploymentService
             }
         }
 
+        public void UpdateExternalDependencies(ExternalDependenciesSettings externalDependenciesSettings)
+        {
+            throw new NotImplementedException();
+        }
+
         private static void CreateZipEntriesFromFiles(IEnumerable<string> fileNames, ZipArchive zipArchive, DeploymentSettings deploymentSettings, string path)
         {
             foreach (var fileName in fileNames)

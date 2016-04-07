@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.UI;
 using Autofac;
 
-namespace DI.WebForms.Core
+namespace DI.Autofac.WebForms.Core
 {
     public class AutofacPageHandlerFactory : PageHandlerFactory
     {

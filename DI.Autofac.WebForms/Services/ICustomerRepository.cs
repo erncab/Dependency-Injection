@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using DI.Autofac.WebForms.Models;
 
-namespace DI.WebForms
+namespace DI.Autofac.WebForms.Services
 {
     public interface ICustomerRepository
     {

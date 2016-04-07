@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.UI;
+using DI.Autofac.WebForms.Models;
+using DI.Autofac.WebForms.Services;
 
-namespace DI.WebForms
+namespace DI.Autofac.WebForms
 {
     public partial class Customer1 : Page
     {

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Autofac;
+using DI.Autofac.WebForms.Services;
 
-namespace DI.WebForms
+namespace DI.Autofac.WebForms
 {
     public class Global : System.Web.HttpApplication
     {

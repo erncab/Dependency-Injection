@@ -36,8 +36,13 @@
     <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\ActionBase.cs" />
+    <Compile Include="Actions\CopyFiles.cs" />
+    <Compile Include="Actions\CopyFilesByExtension.cs" />
+    <Compile Include="Actions\ZipFiles.cs" />
     <Compile Include="DeploymentService.cs" />
     <Compile Include="DeploymentSettings.cs" />
+    <Compile Include="ExternalDependenciesSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

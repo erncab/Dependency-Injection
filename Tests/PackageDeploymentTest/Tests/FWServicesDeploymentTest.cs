@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PackageDeploymentService;
 
-namespace PackageDeploymentTest
+namespace PackageDeploymentTest.Tests
 {
     [TestClass]
     public class FWServicesDeploymentTest
@@ -12,13 +12,17 @@ namespace PackageDeploymentTest
         {
             var deploymentSettings = new DeploymentSettings
             {
-                SourcePath = @"C:\Ernesto\Learning\IoC Containers, Dependency Injection\DeepDiveIntoDI\Source\Tests\PackageDeploymentTest\Source Files\",
-                ZipFileName = "interface 5.5v",
+                SourcePath = @"C:\TFWServices Deployment\bin\",
+                ZipFileName = "interface v5.23",
                 TargetPath = @"C:\Ernesto\Learning\IoC Containers, Dependency Injection\DeepDiveIntoDI\Source\Tests\PackageDeploymentTest\Deployment Folder\",
                 FilesToExclude = new List<string>
                 {
                     "file_01.dll"
-                },
+                }
+            };
+
+            var externalDependenciesSettings = new ExternalDependenciesSettings
+            {
                 ServiceClientPath = @"C:\Ernesto\Learning\IoC Containers, Dependency Injection\DeepDiveIntoDI\Source\Tests\PackageDeploymentTest\Source Files\bin\Release\",
                 ExternalDependenciesPath = @"C:\Ernesto\Learning\IoC Containers, Dependency Injection\DeepDiveIntoDI\Source\Tests\PackageDeploymentTest\ExternalDependencies\",
                 FilesToInclude = new List<string>
@@ -32,7 +36,7 @@ namespace PackageDeploymentTest
 
             deploymentService.CreateDeploymentPackage(deploymentSettings);
 
-            deploymentService.UpdateExternalDependencies(deploymentSettings.ServiceClientPath, deploymentSettings.ExternalDependenciesPath, deploymentSettings.FilesToInclude);
+            deploymentService.UpdateExternalDependencies(externalDependenciesSettings.ServiceClientPath, externalDependenciesSettings.ExternalDependenciesPath, deploymentSettings.FilesToInclude);
         }
     }
 }
