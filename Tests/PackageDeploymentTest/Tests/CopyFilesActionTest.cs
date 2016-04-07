@@ -11,12 +11,15 @@ namespace PackageDeploymentTest.Tests
         public void CopyFilesAction()
         {
             // Arrange
+            const string fwsDeploymentPath = @"C:\TFWServices Deployment";
+            const string cicIntegrationPath = @"C:\FWS_CIC_InterfaceService Deployment\CIC Integration Deployment";
+ 
             var actions = new List<ActionBase>
             {
                 new CopyFiles
                 {
-                    SourceFolder = @"C:\TFWServices Deployment\bin\",
-                    TargetFolder = @"C:\FWS_CIC_InterfaceService Deployment\CIC Integration Deployment\bin\AAAAA\",
+                    SourceFolder = string.Format(@"{0}\bin", fwsDeploymentPath),
+                    TargetFolder = string.Format(@"{0}\bin", cicIntegrationPath),
                     FilesToExclude = new List<string>
                     {
                         "AutoMapper.dll",
@@ -26,14 +29,16 @@ namespace PackageDeploymentTest.Tests
                 },
                 new CopyFilesByExtension
                 {
-                    SourceFolder = @"C:\TFWServices Deployment\",
-                    TargetFolder = @"C:\FWS_CIC_InterfaceService Deployment\CIC Integration Deployment\bin\AAAAA\",
+                    SourceFolder = fwsDeploymentPath,
+                    TargetFolder = cicIntegrationPath,
                     Extension = "svc"
                 },
                 new ZipFiles
                 {
-                    SourceFolder = @"C:\FWS_CIC_InterfaceService Deployment\CIC Integration Deployment\bin\AAAAA\",
-                    TargetFolder = @"C:\FWS_CIC_InterfaceService Deployment\CIC Integration Deployment\bin\BBBBB\",
+                    SourceFolder = cicIntegrationPath,
+                    TargetFolder = cicIntegrationPath,
+                    FileName = "interface v5.23",
+                    Extension = "svc"
                 }
             };
 

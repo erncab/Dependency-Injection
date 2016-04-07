@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace PackageDeploymentService.Actions
@@ -47,9 +46,5 @@ namespace PackageDeploymentService.Actions
 
             return false;
         }
-
-        public List<string> FileNames = new List<string>();
-        public List<string> FilesToInclude = new List<string>();
-        public List<string> FilesToExclude = new List<string>();
     }
 }
