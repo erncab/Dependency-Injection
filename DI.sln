@@ -58,7 +58,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Autofac
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D90BD52C-3DF0-4281-870E-A505F1BBE051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageDeploymentTest", "Tests\PackageDeploymentTest\PackageDeploymentTest.csproj", "{7BC7C05E-674E-4315-87B9-0144C166912E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageDeploymentService.Test", "Tests\PackageDeploymentTest\PackageDeploymentService.Test.csproj", "{7BC7C05E-674E-4315-87B9-0144C166912E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{066C65A9-644D-4112-83B4-CF6B6F755597}"
 EndProject
