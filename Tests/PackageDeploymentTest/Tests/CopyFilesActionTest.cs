@@ -9,7 +9,7 @@ namespace PackageDeploymentTest.Tests
     public class CopyFilesActionTest
     {
         [TestMethod]
-        public void CopyFilesAction()
+        public void CICPackageDeploymentTest()
         {
             // Arrange
             const string fwsDeploymentPath = @"C:\TFWServices Deployment\";
