@@ -30,7 +30,7 @@ namespace PackageDeploymentService.Actions
                     {
                         File.Copy(string.Format("{0}{1}", fileInfo.SourcePath, shortFileName), string.Format("{0}{1}", fileInfo.TargetPath, shortFileName), true);
 
-                        Buffer.AppendLine(string.Format("\t {0}", shortFileName));
+                        Buffer.AppendLine(string.Format("\t\t {0}", shortFileName));
                     }
                 }
             }
