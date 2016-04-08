@@ -1,17 +1,23 @@
 ﻿using System.IO;
-using System.Text;
 
 namespace PackageDeploymentService.Actions
 {
     public class CopyFiles : ActionBase
     {
-        protected override void ExecuteAction()
+        public override void Execute()
         {
             foreach (var fileInfo in FileInfoCollection)
             {
+                Buffer.AppendLine("");
+                Buffer.AppendLine("Copying files ...");
+                Buffer.AppendLine(string.Format("\t Source: {0}", fileInfo.SourcePath));
+                Buffer.AppendLine(string.Format("\t Target: {0}", fileInfo.TargetPath));
+
                 if (!string.IsNullOrEmpty(fileInfo.TargetPath) && !Directory.Exists(fileInfo.TargetPath))
                 {
                     Directory.CreateDirectory(fileInfo.TargetPath);
+
+                    Buffer.AppendLine(string.Format("Created folder: {0}", fileInfo.TargetPath));
                 }
 
                 var fileNames = Directory.GetFiles(fileInfo.SourcePath, string.Format("*.{0}", fileInfo.Extension));
@@ -23,20 +29,10 @@ namespace PackageDeploymentService.Actions
                     if (fileInfo.FileShouldBeCopied(shortFileName))
                     {
                         File.Copy(string.Format("{0}{1}", fileInfo.SourcePath, shortFileName), string.Format("{0}{1}", fileInfo.TargetPath, shortFileName), true);
+
+                        Buffer.AppendLine(string.Format("\t {0}", shortFileName));
                     }
                 }
-            }
-        }
-
-        public override string Description
-        {
-            get
-            {
-                var sb = new StringBuilder("Copied files ...");
-
-                sb.AppendLine(GetType().Name);
-
-                return sb.ToString();
             }
         }
     }

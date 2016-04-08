@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace PackageDeploymentService.Actions
 {
@@ -7,18 +8,18 @@ namespace PackageDeploymentService.Actions
         public List<string> SourceFolders { get; set; }
         public List<FileInfo> FileInfoCollection { get; set; }
 
+        public StringBuilder Buffer = new StringBuilder();
+
         protected virtual bool FileCanBeCopied(string shortFileName)
         {
             return true; 
         }
 
-        public abstract string Description { get; }
-
-        public virtual void Execute()
+        public virtual string Description
         {
-            ExecuteAction();
+            get { return Buffer.ToString(); }
         }
 
-        protected abstract void ExecuteAction();
+        public abstract void Execute();
     }
 }

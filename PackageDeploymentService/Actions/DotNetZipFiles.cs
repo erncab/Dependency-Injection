@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace PackageDeploymentService.Actions
         public string FileName { get; set; }
         public string TargetPath { get; set; }
 
-        protected override void ExecuteAction()
+        public override void Execute()
         {
             if (!string.IsNullOrEmpty(TargetPath) && !Directory.Exists(TargetPath))
             {
@@ -21,6 +22,10 @@ namespace PackageDeploymentService.Actions
             }
 
             var zipFileFullName = string.Format(@"{0}{1}.zip", TargetPath, FileName);
+
+            Buffer.AppendLine("");
+            Buffer.AppendLine("Creating zip file ...");
+            Buffer.AppendLine(string.Format("\t Name: {0}", zipFileFullName));
 
             if (File.Exists(zipFileFullName))
             {
@@ -39,8 +44,16 @@ namespace PackageDeploymentService.Actions
 
         private void AddDirectories(ZipFile zip)
         {
+            if (SourceFolders.Count > 0)
+            {
+                Buffer.AppendLine("");
+                Buffer.AppendLine("Adding directories to zip ...");
+            }
+
             foreach (var sourceFolder in SourceFolders)
             {
+                Buffer.AppendLine(string.Format("\t Source: {0}", sourceFolder));
+
                 zip.AddDirectory(sourceFolder, @"bin\");
             }
         }
@@ -51,12 +64,20 @@ namespace PackageDeploymentService.Actions
             {
                 var fileNames = Directory.GetFiles(fileInfo.SourcePath, string.Format("*.{0}", fileInfo.Extension)).ToList();
 
+                if (FilesShouldBeCopied(fileInfo, fileNames))
+                {
+                    Buffer.AppendLine("");
+                    Buffer.AppendLine("Adding files to zip ...");
+                }
+
                 foreach (var fileName in fileNames)
                 {
                     var shortFileName = fileName.Replace(fileInfo.SourcePath, "");
 
                     if (fileInfo.FileShouldBeCopied(shortFileName))
                     {
+                        Buffer.AppendLine(string.Format("\t {0}", shortFileName));
+
                         // Add file to the zip root path
                         zip.AddFile(fileName, "");
                     }
@@ -64,16 +85,19 @@ namespace PackageDeploymentService.Actions
             }
         }
 
-        public override string Description
+        private bool FilesShouldBeCopied(FileInfo fileInfo, IEnumerable<string> fileNames)
         {
-            get
+            foreach (var fileName in fileNames)
             {
-                var sb = new StringBuilder("Zipped files");
+                var shortFileName = fileName.Replace(fileInfo.SourcePath, "");
 
-                sb.AppendLine(GetType().Name);
-
-                return sb.ToString();
+                if (fileInfo.FileShouldBeCopied(shortFileName))
+                {
+                    return true;
+                }
             }
+
+            return false;
         }
     }
 }

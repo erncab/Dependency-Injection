@@ -60,8 +60,9 @@ namespace PackageDeploymentTest.Tests
             };
 
             // Act
-            Console.WriteLine(actions.Description);
             actions.Execute();
+
+            Console.WriteLine(actions.Description);
 
             // Assert
             Assert.IsTrue(true);

@@ -15,7 +15,7 @@ namespace PackageDeploymentService.Actions
             return _actions;
         }
 
-        protected override void ExecuteAction()
+        public override void Execute()
         {
             foreach (var action in _actions)
             {
@@ -27,14 +27,12 @@ namespace PackageDeploymentService.Actions
         {
             get
             {
-                var sb = new StringBuilder();
-
                 foreach (var action in _actions)
                 {
-                    sb.AppendLine(action.Description);
+                    Buffer.AppendLine(action.Description);
                 }
 
-                return sb.ToString();
+                return Buffer.ToString();
             }
         }
 
