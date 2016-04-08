@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using ZipFile = Ionic.Zip.ZipFile;
 
 namespace PackageDeploymentService.Actions
@@ -85,7 +84,7 @@ namespace PackageDeploymentService.Actions
             }
         }
 
-        private bool FilesShouldBeCopied(FileInfo fileInfo, IEnumerable<string> fileNames)
+        private static bool FilesShouldBeCopied(FileInfo fileInfo, IEnumerable<string> fileNames)
         {
             foreach (var fileName in fileNames)
             {
