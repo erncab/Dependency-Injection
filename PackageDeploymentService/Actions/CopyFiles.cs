@@ -1,50 +1,43 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Text;
 
 namespace PackageDeploymentService.Actions
 {
     public class CopyFiles : ActionBase
     {
-        public override void Execute()
+        protected override void ExecuteAction()
         {
-            if (!Directory.Exists(TargetFolder))
+            foreach (var fileInfo in FileInfoCollection)
             {
-                Directory.CreateDirectory(TargetFolder);
-            }
-
-            var fileNames = Directory.GetFiles(SourceFolder, string.Format("*.{0}", Extension));
-
-            foreach (var fileName in fileNames)
-            {
-                var shortFileName = fileName.Replace(SourceFolder, "");
-
-                if (FileCanBeCopied(shortFileName))
+                if (!string.IsNullOrEmpty(fileInfo.TargetPath) && !Directory.Exists(fileInfo.TargetPath))
                 {
-                    Console.WriteLine(fileName);
+                    Directory.CreateDirectory(fileInfo.TargetPath);
+                }
 
-                    File.Copy(string.Format("{0}{1}", SourceFolder, shortFileName), string.Format("{0}{1}", TargetFolder, shortFileName), true);
+                var fileNames = Directory.GetFiles(fileInfo.SourcePath, string.Format("*.{0}", fileInfo.Extension));
+
+                foreach (var fileName in fileNames)
+                {
+                    var shortFileName = fileName.Replace(fileInfo.SourcePath, "");
+
+                    if (fileInfo.FileShouldBeCopied(shortFileName))
+                    {
+                        File.Copy(string.Format("{0}{1}", fileInfo.SourcePath, shortFileName), string.Format("{0}{1}", fileInfo.TargetPath, shortFileName), true);
+                    }
                 }
             }
         }
 
-        protected override bool FileCanBeCopied(string shortFileName)
+        public override string Description
         {
-            if (FileNames.Count > 0 && FileNames.Contains(shortFileName))
+            get
             {
-                return true;
-            }
+                var sb = new StringBuilder("Copied files ...");
 
-            if (FilesToInclude.Count > 0 && FilesToInclude.Contains(shortFileName))
-            {
-                return true;
-            }
+                sb.AppendLine(GetType().Name);
 
-            if (FilesToExclude.Count > 0 && !FilesToExclude.Contains(shortFileName))
-            {
-                return true;
+                return sb.ToString();
             }
-
-            return false;
         }
     }
 }

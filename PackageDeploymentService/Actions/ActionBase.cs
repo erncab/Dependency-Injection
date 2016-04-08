@@ -4,19 +4,21 @@ namespace PackageDeploymentService.Actions
 {
     public abstract class ActionBase
     {
+        public List<string> SourceFolders { get; set; }
+        public List<FileInfo> FileInfoCollection { get; set; }
+
         protected virtual bool FileCanBeCopied(string shortFileName)
         {
             return true; 
         }
 
-        public string SourceFolder { get; set; }
-        public string TargetFolder { get; set; }
-        public string Extension { get; set; }
+        public abstract string Description { get; }
 
-        public List<string> FileNames = new List<string>();
-        public List<string> FilesToInclude = new List<string>();
-        public List<string> FilesToExclude = new List<string>();
+        public virtual void Execute()
+        {
+            ExecuteAction();
+        }
 
-        public abstract void Execute();
+        protected abstract void ExecuteAction();
     }
 }
